@@ -30,7 +30,12 @@ Sistem akan memberikan diagnosis penyakit yang sesuai dengan kombinasi gejala.
 
 
 
+
+
+
 **Soal 2. Review Jurnal/Artikel AI**
+
+
 
 
 **Judul Artikel:**

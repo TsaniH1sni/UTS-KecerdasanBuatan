@@ -35,19 +35,6 @@ Sistem akan memberikan diagnosis penyakit yang sesuai dengan kombinasi gejala.
 Penerapan Kecerdasan Buatan dalam Personalisasi Pengalaman Pelanggan dan Pengambilan Keputusan Bisnis di Platform E-Commerce
 **Sumber**           : BINUS University Bandung
 **Tanggal Publikasi**: 30 April 2024
-​
-Industri Kontan
-+5
-BINUS UNIVERSITY
-+5
-ResearchGate
-+5
-jsaer.com
-+2
-datahubanalytics.com
-+2
-alpha-solutions.com
-+2
 
 **Tujuan Penelitian:**
 Artikel ini bertujuan untuk mengeksplorasi bagaimana penerapan kecerdasan buatan (AI) dapat meningkatkan personalisasi pengalaman pelanggan dan mendukung pengambilan keputusan bisnis di platform e-commerce.​

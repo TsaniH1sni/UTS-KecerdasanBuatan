@@ -54,7 +54,7 @@ Artikel ini bertujuan untuk mengeksplorasi bagaimana penerapan kecerdasan buatan
 ijsoc.goacademica.com
 
 **Metode AI yang Digunakan:**
-**R****ekomendasi Produk**: AI digunakan untuk mencocokkan rekomendasi produk berdasarkan perilaku dan preferensi pelanggan.
+**Rekomendasi Produk**: AI digunakan untuk mencocokkan rekomendasi produk berdasarkan perilaku dan preferensi pelanggan.
 
 **Layanan Pelanggan**: Implementasi chatbot untuk meningkatkan interaksi dan respons terhadap pelanggan.
 

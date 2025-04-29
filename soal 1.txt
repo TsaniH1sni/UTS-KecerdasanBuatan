@@ -1,0 +1,242 @@
+1. Sistem Pakar Berbasis Aturan Logika (Minimal 4 Aturan)
+Aturan-aturan (Rule-based Expert System):
+R1: IF daun menguning AND tanaman layu THEN hama = Hama nematoda akar
+R2: IF daun berlubang AND terdapat bercak hitam THEN hama = Hama ulat grayak
+R3: IF daun menguning AND terdapat bercak hitam THEN hama = jamur daun
+R4: IF daun berlubang THEN hama = Hama kumbang pemakan daun
+R5: IF tanaman layu AND tidak ada bercak AND tidak berlubang THEN hama = Fusarium sp.
+
+2. Logika Proposisional, Pseudocode, Prolog dan Python
+
+LOGIKA PROPOSISIONAL
+Notasi untuk Gejala (Simbol Proposisional):
+A = Daun menguning
+
+B = Terdapat bercak hitam
+
+C = Daun berlubang
+
+D = Tanaman layu
+
+Logika Proposisional untuk 5 Aturan
+(A ∧ D) → Nematoda_akar
+(Jika daun menguning dan tanaman layu, maka hama adalah Nematoda akar)
+
+(C ∧ B) → Ulat_grayak
+(Jika daun berlubang dan ada bercak hitam, maka hama adalah Ulat grayak)
+
+(A ∧ B) → Jamur_daun
+(Jika daun menguning dan ada bercak hitam, maka hama adalah Jamur daun)
+
+(C) → Kumbang_pemakan_daun
+(Jika daun berlubang, maka hama adalah Kumbang pemakan daun)
+
+(D ∧ ¬B ∧ ¬C) → Fusarium_sp
+(Jika tanaman layu dan tidak ada bercak serta tidak berlubang, maka hama adalah Fusarium sp.)
+
+
+PSEUDOCODE
+
+INPUT: daun_menguning, bercak_hitam, daun_berlubang, tanaman_layu
+
+IF daun_menguning AND tanaman_layu THEN
+    OUTPUT: "Nematoda akar"
+ELSE IF daun_berlubang AND bercak_hitam THEN
+    OUTPUT: "Ulat grayak"
+ELSE IF daun_menguning AND bercak_hitam THEN
+    OUTPUT: "Jamur daun"
+ELSE IF daun_berlubang THEN
+    OUTPUT: "Kumbang pemakan daun"
+ELSE IF tanaman_layu AND NOT bercak_hitam AND NOT daun_berlubang THEN
+    OUTPUT: "Fusarium sp."
+ELSE
+    OUTPUT: "Hama tidak terdeteksi"
+
+
+PROLOG 
+
+% Fakta gejala
+gejala(daun_menguning) :- ask('Apakah daun menguning? (y/n) ').
+gejala(bercak_hitam) :- ask('Apakah terdapat bercak hitam? (y/n) ').
+gejala(daun_berlubang) :- ask('Apakah daun berlubang? (y/n) ').
+gejala(tanaman_layu) :- ask('Apakah tanaman layu? (y/n) ').
+
+% Aturan penyakit berdasarkan logika proposisional
+penyakit(nematoda_akar) :-
+    gejala(daun_menguning),
+    gejala(tanaman_layu).
+
+penyakit(ulat_grayak) :-
+    gejala(daun_berlubang),
+    gejala(bercak_hitam).
+
+penyakit(jamur_daun) :-
+    gejala(daun_menguning),
+    gejala(bercak_hitam).
+
+penyakit(kumbang_pemakan_daun) :-
+    gejala(daun_berlubang).
+
+penyakit(fusarium_sp) :-
+    gejala(tanaman_layu),
+    \+ gejala(bercak_hitam),
+    \+ gejala(daun_berlubang).
+
+% Proses input dari user
+ask(Pertanyaan) :-
+    write(Pertanyaan),
+    read(Respon),
+    Respon = y.
+
+% Program utama
+start :-
+    findall(P, penyakit(P), List),
+    (List = [] -> write('Tidak ada penyakit yang terdeteksi berdasarkan gejala tersebut.');
+     write('Penyakit yang terdeteksi: '), nl, tampilkan(List)).
+
+% Menampilkan hasil
+tampilkan([]).
+tampilkan([H|T]) :-
+    write('- '), write(H), nl,
+    tampilkan(T).
+
+
+
+PYTHON
+
+def tanya_gejala(pertanyaan):
+    jawaban = input(pertanyaan + " (y/n): ").lower()
+    return jawaban == 'y'
+
+def diagnosa():
+    # Tanya gejala ke user
+    daun_menguning = tanya_gejala("Apakah daun menguning?")
+    bercak_hitam = tanya_gejala("Apakah terdapat bercak hitam?")
+    daun_berlubang = tanya_gejala("Apakah daun berlubang?")
+    tanaman_layu = tanya_gejala("Apakah tanaman layu?")
+
+    # Daftar penyakit yang terdeteksi
+    penyakit_terdeteksi = []
+
+    # Cek logika aturan
+    if daun_menguning and tanaman_layu:
+        penyakit_terdeteksi.append("Nematoda akar")
+    if daun_berlubang and bercak_hitam:
+        penyakit_terdeteksi.append("Ulat grayak")
+    if daun_menguning and bercak_hitam:
+        penyakit_terdeteksi.append("Jamur daun")
+    if daun_berlubang:
+        penyakit_terdeteksi.append("Kumbang pemakan daun")
+    if tanaman_layu and not bercak_hitam and not daun_berlubang:
+        penyakit_terdeteksi.append("Fusarium sp.")
+
+    # Tampilkan hasil
+    if penyakit_terdeteksi:
+        print("\nPenyakit yang terdeteksi:")
+        for p in penyakit_terdeteksi:
+            print(f"- {p}")
+    else:
+        print("\nTidak ada penyakit yang terdeteksi berdasarkan gejala tersebut.")
+
+if __name__ == "__main__":
+    diagnosa()
+
+
+
+
+3. Alur Inferensi untuk Diagnosis Penyakit Tanaman (Python)
+
+-Input Gejala dari Pengguna : Sistem menanyakan gejala satu per satu kepada pengguna, 
+
+Apakah daun menguning? (y/n)
+
+Apakah terdapat bercak hitam? (y/n)
+
+Apakah daun berlubang? (y/n)
+
+Apakah tanaman layu? (y/n)
+
+Pengguna memberikan jawaban untuk setiap gejala (y/n).
+
+
+-Evaluasi Logika Proposisional (Inferensi)
+
+Berdasarkan gejala yang diberikan oleh pengguna, sistem akan mengevaluasi aturan logika proposisional yang telah ditetapkan. 
+
+Aturan 1:
+
+Jika daun menguning (A) dan tanaman layu (D), maka penyakit yang terdeteksi adalah Nematoda akar.
+
+(A ∧ D) → Nematoda_akar
+
+Aturan 2:
+
+Jika daun berlubang (C) dan bercak hitam (B), maka penyakit yang terdeteksi adalah Ulat grayak.
+
+(C ∧ B) → Ulat_grayak
+
+Aturan 3:
+
+Jika daun menguning (A) dan bercak hitam (B), maka penyakit yang terdeteksi adalah Jamur daun.
+
+(A ∧ B) → Jamur_daun
+
+Aturan 4:
+
+Jika daun berlubang (C), maka penyakit yang terdeteksi adalah Kumbang pemakan daun.
+
+(C) → Kumbang_pemakan_daun
+
+Aturan 5:
+
+Jika tanaman layu (D) dan tidak ada bercak hitam (¬B) dan tidak ada daun berlubang (¬C), maka penyakit yang terdeteksi adalah Fusarium sp..
+
+(D ∧ ¬B ∧ ¬C) → Fusarium_sp
+
+
+-Evaluasi Berdasarkan Input:
+
+Sistem memeriksa apakah kombinasi gejala yang diberikan oleh pengguna cocok dengan salah satu aturan inferensi.Jika aturan terpenuhi, maka sistem akan menambahkan penyakit yang relevan ke dalam daftar penyakit yang terdeteksi.
+
+Output Diagnosis:
+
+Jika ada penyakit yang terdeteksi berdasarkan kombinasi gejala, sistem akan menampilkan daftar penyakit tersebut.
+
+Jika tidak ada penyakit yang terdeteksi, sistem akan menampilkan pesan bahwa tidak ada penyakit yang terdeteksi berdasarkan gejala yang dimasukkan.
+
+
+-Ilustrasi Alur Inferensi, Misalkan pengguna memberikan input sebagai berikut :
+
+Daun menguning (y)
+
+Terdapat bercak hitam (n)
+
+Daun berlubang (n)
+
+Tanaman layu (y)
+
+Maka, sistem akan menjalankan evaluasi:
+
+Cek (A ∧ D):
+
+A = y (daun menguning), D = y (tanaman layu) → Penyakit terdeteksi: Nematoda akar
+
+Cek (C ∧ B):
+
+C = n (daun berlubang), B = n (bercak hitam) → Tidak cocok, lanjut ke aturan berikutnya.
+
+Cek (A ∧ B):
+
+A = y (daun menguning), B = n (bercak hitam) → Tidak cocok, lanjut ke aturan berikutnya.
+
+Cek (C):
+
+C = n (daun berlubang) → Tidak cocok, lanjut ke aturan berikutnya.
+
+Cek (D ∧ ¬B ∧ ¬C):
+
+D = y (tanaman layu), B = n (tidak ada bercak hitam), C = n (tidak ada daun berlubang) → Penyakit terdeteksi: Fusarium sp.
+
+-Output akhir, Penyakit yang terdeteksi adalah :
+Nematoda akar
+Fusarium sp.
